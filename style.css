@@ -10,10 +10,8 @@ body {
 }
 
 #gameboard {
-    height: 50%;
-    width: 50%;
     display: grid;
-    grid-template: repeat(3, 33%) / repeat(3, 33%);
+    grid-template: repeat(3, 200px) / repeat(3, 200px);
 }
 
 .gamesquare {
