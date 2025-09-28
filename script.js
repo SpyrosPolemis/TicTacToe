@@ -2,20 +2,28 @@ function Game() {
     let winner = null;
     player1Turn = false;
     let squareToMark = 0;
-    while (winner === null) {
-        player1Turn = !player1Turn
-        if (player1Turn) {
-            mark = "X"
-        } else {
-            mark = "O"
-        }
-        squareToMark = prompt("Enter the square to mark: ")
-        gameboardModule.getGameboard()[squareToMark].markSquare(mark)
 
-        gameboardModule.printGameboard()
-        console.log("-------------------")
-        winner = gameboardModule.checkForWinner()
-    }
+    const gameboardUI = document.querySelector("#gameboard")
+    const gameSquares = document.querySelectorAll(".gamesquare")
+    gameSquares.forEach((square, index) => {
+        square.addEventListener("click", (event) => {
+            squareToMark = index
+            player1Turn = !player1Turn
+            if (player1Turn) {
+                mark = "X"
+            } else {
+                mark = "O"
+            }
+            gameboardModule.getGameboard()[squareToMark].markSquare(mark)
+            square.textContent = mark
+
+            gameboardModule.printGameboard()
+            console.log("-------------------")
+            winner = gameboardModule.checkForWinner()
+        });
+    });
+
+    
 }
 
 const gameboardModule = (function() {
@@ -73,3 +81,5 @@ function populateBoard() {
         gameboardModule.getGameboard()[i].markSquare("X")
     }
 }
+
+Game()
