@@ -1,14 +1,24 @@
-function startGame() {
-    const player1 = createPlayer("X")
-    const player2 = createPlayer("Y")
+function Game() {
     let winner = null;
+    player1Turn = false;
+    let squareToMark = 0;
     while (winner === null) {
-        //play turn, check for win
-        winner = gameboard.checkForWinner()
+        player1Turn = !player1Turn
+        if (player1Turn) {
+            mark = "X"
+        } else {
+            mark = "O"
+        }
+        squareToMark = prompt("Enter the square to mark: ")
+        gameboardModule.getGameboard()[squareToMark].markSquare(mark)
+
+        gameboardModule.printGameboard()
+        console.log("-------------------")
+        winner = gameboardModule.checkForWinner()
     }
 }
 
-const gameboard = (function() {
+const gameboardModule = (function() {
     const gameboard = [createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare()]
     const printGameboard = function() {
         console.log(gameboard[0].getStatus() + gameboard[1].getStatus() + gameboard[2].getStatus())
@@ -21,27 +31,35 @@ const gameboard = (function() {
     }
 
     const checkForWinner = function() {
-        printGameboard()
+        const winningCombinations = [
+            [0, 1, 2], // rows
+            [3, 4 ,5],
+            [6, 7, 8],
+            [0, 3, 6], // columns
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8], // diagonals
+            [2, 4, 6]
+        ]
+        for (const [a, b, c] of winningCombinations) {
+            if (gameboard[a].getStatus() && gameboard[a].getStatus() === gameboard[b].getStatus() && gameboard[b].getStatus() === gameboard[c].getStatus()) {
+                console.log(`Winner is ${gameboard[a].getStatus()}`)
+                return gameboard[a].getStatus();
+            }
+        }
+        return null;
     }
     return {printGameboard, getGameboard, checkForWinner}
 })();
 
-
-function createPlayer(mark) {
-    const playerName = `Player ${mark}`
-    const getMark = () => mark;
-    return {playerName, getMark}
-}
-
 function createSquare() {
     let status = null;
-    markSquare = function(mark) {
+    const markSquare = function(mark) {
         if (status === null) {
             status = mark;
-            gameboard.checkForWinner()
         }
     }
-    getStatus = function() {
+    const getStatus = function() {
         return status;
     }
 
@@ -52,6 +70,6 @@ function createSquare() {
 
 function populateBoard() {
     for (let i  = 0; i < 9; i++) {
-        gameboard.getGameboard()[i].markSquare("X")
+        gameboardModule.getGameboard()[i].markSquare("X")
     }
 }
