@@ -3,10 +3,14 @@ function Game() {
     player1Turn = false;
     let squareToMark = 0;
 
-    const gameboardUI = document.querySelector("#gameboard")
     const gameSquares = document.querySelectorAll(".gamesquare")
+    
     gameSquares.forEach((square, index) => {
-        square.addEventListener("click", (event) => {
+        square.addEventListener("click", function handleClick() {
+            if (winner) {
+                return;
+            }
+
             squareToMark = index
             player1Turn = !player1Turn
             if (player1Turn) {
@@ -16,14 +20,14 @@ function Game() {
             }
             gameboardModule.getGameboard()[squareToMark].markSquare(mark)
             square.textContent = mark
+            square.removeEventListener("click", handleClick)
 
-            gameboardModule.printGameboard()
-            console.log("-------------------")
             winner = gameboardModule.checkForWinner()
+            if (winner) {
+                    alert(`Winner is Player ${winner}`)
+            }
         });
     });
-
-    
 }
 
 const gameboardModule = (function() {
