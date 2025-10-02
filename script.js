@@ -31,7 +31,21 @@ function Game() {
 }
 
 const gameboardModule = (function() {
-    const gameboard = [createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare()]
+    function createSquare() {
+        let status = null;
+        const markSquare = function(mark) {
+            if (status === null) {
+                status = mark;
+            }
+        }
+        const getStatus = function() {
+            return status;
+        }
+    
+        return {markSquare, getStatus}
+    }    
+
+    let gameboard = [createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare()]
     const printGameboard = function() {
         console.log(gameboard[0].getStatus() + gameboard[1].getStatus() + gameboard[2].getStatus())
         console.log(gameboard[3].getStatus() + gameboard[4].getStatus() + gameboard[5].getStatus())
@@ -40,6 +54,13 @@ const gameboardModule = (function() {
 
     const getGameboard = function() {
         return gameboard;
+    }
+
+    const resetGameboard = function() {
+        gameboard = [createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare()]
+        document.querySelectorAll(".gamesquare").forEach((square) => {
+            square.textContent = "";
+        });
     }
 
     const checkForWinner = function() {
@@ -61,21 +82,15 @@ const gameboardModule = (function() {
         }
         return null;
     }
-    return {printGameboard, getGameboard, checkForWinner}
+    return {printGameboard, getGameboard, checkForWinner, resetGameboard}
 })();
 
-function createSquare() {
-    let status = null;
-    const markSquare = function(mark) {
-        if (status === null) {
-            status = mark;
-        }
-    }
-    const getStatus = function() {
-        return status;
-    }
+const resetBtn = document.querySelector("#reset")
+resetBtn.addEventListener("click", resetGame)
 
-    return {markSquare, getStatus}
+function resetGame() {
+    gameboardModule.resetGameboard()
+    Game()
 }
 
 // Testing
