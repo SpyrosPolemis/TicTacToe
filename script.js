@@ -10,6 +10,7 @@ function Game() {
             if (winner) {
                 return;
             }
+            let mark = null;
 
             squareToMark = index
             player1Turn = !player1Turn
@@ -20,6 +21,7 @@ function Game() {
             }
             gameboardModule.getGameboard()[squareToMark].markSquare(mark)
             square.textContent = mark
+            square.classList.add(mark)
             square.removeEventListener("click", handleClick)
 
             winner = gameboardModule.checkForWinner()

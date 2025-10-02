@@ -9,6 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    font-size: 150px;
     /* background-color: black;
     color: grey; */
 }
@@ -16,16 +17,27 @@ body {
 #gameboard {
     display: grid;
     grid-template: repeat(3, 200px) / repeat(3, 200px);
+    gap: 2px;
+    background-color: black;
 }
 
 .gamesquare {
     align-self: center;
     justify-self: center;
-    border: 1px solid;
+    background-color: rgb(230, 193, 241);
+    /* border: 1px solid; */
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.gamesquare.X {
+    color: blue;
+}
+
+.gamesquare.O {
+    color: purple;
 }
 
