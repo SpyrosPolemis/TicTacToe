@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TicTacToe</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Schoolbell&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <label for="player1">Player1:</label>
-        <input type="text" name="player1" id="player1">
+    <div id="player1-section" class="player-section">
+        <div>
+            <label for="player1">Player1:</label>
+            <input type="text" name="player1" id="player1-input">
+        </div>
+        <p id="player1-wins">Wins:</p>
     </div>
     <div id="centre">
         <div id="gameboard">
@@ -25,9 +31,12 @@
         </div>
         <button id="reset">Reset</button>    
     </div>
-    <div>
-        <label for="player2">Player2:</label>
-        <input type="text" name="player2" id="player2">
+    <div id="player2-section" class="player-section">
+        <div>
+            <label for="player2">Player2:</label>
+            <input type="text" name="player2" id="player2-input">
+        </div>
+        <p id="player2-wins">Wins:</p>
     </div>
     <script src="script.js"></script>
 </body>

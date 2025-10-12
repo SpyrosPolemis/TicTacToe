@@ -1,7 +1,28 @@
 function Game() {
     let winner = null;
     player1Turn = false;
-    let squareToMark = 0;
+    let squareToMark;
+
+    const player1NameField = document.querySelector("#player1-input")
+    const player2NameField = document.querySelector("#player2-input")
+
+    const player1 = createPlayer(player1NameField.value)
+    const player2 = createPlayer(player2NameField.value)
+
+    function createPlayer (name) {
+        this.name = name;
+        score = 0;
+
+        getScore = function() {
+            return score;
+        } 
+
+        increaseScore = function() {
+            score += 1;
+        }
+
+        return {getScore, increaseScore, name}
+    }
 
     const gameSquares = document.querySelectorAll(".gamesquare")
     
@@ -12,26 +33,7 @@ function Game() {
             }
             let mark = null;
 
-            const player1NameField = document.querySelector("#player1")
-            const player2NameField = document.querySelector("#player2")
-
-            const player1 = createPlayer(player1NameField.value)
-            const player2 = createPlayer(player2NameField.value)
-
-            function createPlayer (name) {
-                this.name = name;
-                score = 0;
-
-                const getScore = function() {
-                    return score;
-                } 
-
-                const increaseScore = function() {
-                    score += 1;
-                }
-
-                return {getScore, increaseScore, name}
-            }
+            
 
             squareToMark = index
             player1Turn = !player1Turn
@@ -49,8 +51,10 @@ function Game() {
             if (winner) {
                 if (winner === "X") {
                     alert(`The winner is ${player1.name}`)
+                    player1.increaseScore()
                 } else if (winner === "O") {
                     alert(`The winner is ${player2.name}`)
+                    player2.increaseScore()
                 }
             }
         });
@@ -87,6 +91,7 @@ const gameboardModule = (function() {
         gameboard = [createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare(), createSquare()]
         document.querySelectorAll(".gamesquare").forEach((square) => {
             square.textContent = "";
+            square.classList.remove("X", "O")
         });
     }
 

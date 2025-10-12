@@ -5,21 +5,35 @@
 body {
     display: flex;
     height: 100vh;
-    flex-direction:;
     justify-content: center;
     align-items: center;
     gap: 20px;
     
-    /* background-color: black;
-    color: grey; */
+    background-color: lightskyblue;
+    /* color: grey; */
 }
 
 #gameboard {
     display: grid;
     grid-template: repeat(3, 200px) / repeat(3, 200px);
     gap: 2px;
-    background-color: black;
+    background-color: rgb(230, 193, 241);
     font-size: 150px;
+    /* border: 2px solid; */
+    font-family: "schoolbell";
+}
+
+.player-section {
+    background-color:darkorchid;
+    padding: 20px;
+    color: wheat;
+    font-size: 20px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    font-family: "schoolbell";
 }
 
 #centre {
@@ -39,6 +53,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: rotate(5deg);
 }
 
 .gamesquare.X {
