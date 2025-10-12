@@ -5,11 +5,11 @@
 body {
     display: flex;
     height: 100vh;
-    flex-direction: column;
+    flex-direction:;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    font-size: 150px;
+    
     /* background-color: black;
     color: grey; */
 }
@@ -19,6 +19,14 @@ body {
     grid-template: repeat(3, 200px) / repeat(3, 200px);
     gap: 2px;
     background-color: black;
+    font-size: 150px;
+}
+
+#centre {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
 }
 
 .gamesquare {

@@ -12,6 +12,27 @@ function Game() {
             }
             let mark = null;
 
+            const player1NameField = document.querySelector("#player1")
+            const player2NameField = document.querySelector("#player2")
+
+            const player1 = createPlayer(player1NameField.value)
+            const player2 = createPlayer(player2NameField.value)
+
+            function createPlayer (name) {
+                this.name = name;
+                score = 0;
+
+                const getScore = function() {
+                    return score;
+                } 
+
+                const increaseScore = function() {
+                    score += 1;
+                }
+
+                return {getScore, increaseScore, name}
+            }
+
             squareToMark = index
             player1Turn = !player1Turn
             if (player1Turn) {
@@ -26,7 +47,11 @@ function Game() {
 
             winner = gameboardModule.checkForWinner()
             if (winner) {
-                    alert(`Winner is Player ${winner}`)
+                if (winner === "X") {
+                    alert(`The winner is ${player1.name}`)
+                } else if (winner === "O") {
+                    alert(`The winner is ${player2.name}`)
+                }
             }
         });
     });
