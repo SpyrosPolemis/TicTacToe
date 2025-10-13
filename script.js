@@ -1,30 +1,30 @@
+const player1NameField = document.querySelector("#player1-input")
+const player2NameField = document.querySelector("#player2-input")
+const player1 = createPlayer(player1NameField.value)
+const player2 = createPlayer(player2NameField.value)
+
+function createPlayer (name) {
+    const playerName = name;
+    let score = 0;
+
+    getScore = function() {
+        return score;
+    } 
+
+    increaseScore = function() {
+        score += 1;
+    }
+
+    return {getScore, increaseScore, playerName}
+}
+
 function Game() {
     let winner = null;
     player1Turn = false;
     let squareToMark;
-
-    const player1NameField = document.querySelector("#player1-input")
-    const player2NameField = document.querySelector("#player2-input")
-
-    const player1 = createPlayer(player1NameField.value)
-    const player2 = createPlayer(player2NameField.value)
-
-    function createPlayer (name) {
-        this.name = name;
-        score = 0;
-
-        getScore = function() {
-            return score;
-        } 
-
-        increaseScore = function() {
-            score += 1;
-        }
-
-        return {getScore, increaseScore, name}
-    }
-
     const gameSquares = document.querySelectorAll(".gamesquare")
+    const player1WinsField = document.querySelector("#player1-wins")
+    const player2WinsField = document.querySelector("#player2-wins")
     
     gameSquares.forEach((square, index) => {
         square.addEventListener("click", function handleClick() {
@@ -50,11 +50,13 @@ function Game() {
             winner = gameboardModule.checkForWinner()
             if (winner) {
                 if (winner === "X") {
-                    alert(`The winner is ${player1.name}`)
+                    alert(`The winner is ${player1.playerName}`)
                     player1.increaseScore()
+                    player1WinsField.textContent = `Wins: ${player1.getScore()}`
                 } else if (winner === "O") {
-                    alert(`The winner is ${player2.name}`)
+                    alert(`The winner is ${player2.playerName}`)
                     player2.increaseScore()
+                    player2WinsField.textContent = `Wins: ${player2.getScore()}`
                 }
             }
         });
